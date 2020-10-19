@@ -30,8 +30,8 @@ nunjucks.configure("./", {
 
 //configurar a apresentação na pg
 server.get("/", function(req, res){
-    db.query("SELECT * FROM donors", function(err, result){
-        if(err) return res.send("erro db")
+    db.query("SELECT * FROM donors", function(result){
+        //if(err) return res.send("erro db")
 
         const donors = result.rows
         return res.render("index.html", {donors})
@@ -55,7 +55,7 @@ server.post("/", function(req, res){
     const values = [name, email, blood]
     db.query(query, values, function(err){
         // fluxo de erro
-        if(err) return res.send('Erro no bando de dados')
+        if(err) return res.send('Configure o banco de dados')
         // fluxo ideal
         return res.redirect("/")
     })
